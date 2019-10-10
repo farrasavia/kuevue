@@ -1,36 +1,39 @@
 <template>
-  <q-page class="flex flex-center">
-    <button @click="clearMessage">Clear</button>
-    <input v-model="message" @keyup="handleKeyup" @keydown="handleKeydown"/>
-    <h1>{{message}}</h1>
+  <q-page class="q-pa-md">
+    <div class="q-gutter-sm">
+    <input v-model="message" @keypress="handleKeyup"/>
+    <button @click="clearMessage"> PRESS ME </button>  
+    <!-- <h5> {{ message }} </h5> -->
+    <h5 v-if="message.length">{{ message }}</h5>
+    <h6 v-else>No Message</h6>
+    <p> {{ uppercaseMessage() }} </p>
+    </div>
     <img alt="Quasar logo" src="~assets/BL.jpg">
   </q-page>
 </template>
 
 <script>
 export default {
-  data() {
-    return{
-  message : 'Halo Selamat Pagi'
-    }
-
+  data () {
+    return {
+    message: 'I LOVE VUE.js'
+    }  
   },
-  methods:{
-    clearMessage(){
+  methods: {
+    clearMessage() {
       this.message=''
     },
-    handleKeydown(e){
-      if (e.keyCode == 27){
-        this.message='ESC'
+    handleKeyup(e) {
+      // console.log(e)
+      if (e.keyCode==13) {
+        this.message='ENTER'
+      } else if (e.keyCode==27) {
+        this.message='ESC'  
       }
     },
-    handleKeyup(e){
-      if (e.keyCode==13){
-        this.message='ENTER'
+    uppercaseMessage() {
+    return this.message.toUpperCase()
       }
     }
   }
-  // name: 'PageIndex'
-}
-
 </script>
